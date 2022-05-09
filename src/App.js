@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Creator from './components/creator'
+import Form from './components/form'
 
 function App() {
+  const [newBox, setNewBox] = useState([]);
+
+  const handleNewBox = (box) => {
+    if(box.color == ''){
+      return;
+    }
+    if(!box.height){
+      box.height = 100;
+    }
+    if(!box.width){
+      box.width = 100;
+    }
+    setNewBox([...newBox, box])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Form handleNewBox={handleNewBox} />
+      <Creator newBox={newBox} />
     </div>
   );
 }
